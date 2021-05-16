@@ -12,6 +12,7 @@
     <AccionSaldo 
         texto="Disminuir saldo"
         @accion="disminuir()"
+        :desactivar="desactivar"
     />
 </template>
 
@@ -28,15 +29,25 @@ export default {
             saldo: 1000,
             cuenta: "Visa",
             estado: false,
-            servicios: ['giro', 'abono', 'transferencia']
+            servicios: ['giro', 'abono', 'transferencia'],
+            desactivar: false
         }
     },
     methods: {
         aumentar(){
             this.saldo = this.saldo + 100;
+             this.desactivar = false;
         },
         disminuir(){
-            this.saldo = this.saldo - 100;
+            let consultaSaldo = this.saldo - 100;
+            if(consultaSaldo < 0){
+                alert("No se permiten numeros negativos");
+                this.saldo = 0;
+                this.desactivar = true;
+            }else{
+                this.saldo = consultaSaldo;
+            }
+            
         }
     }
 }
