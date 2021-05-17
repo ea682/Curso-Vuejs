@@ -4,6 +4,7 @@
   <div v-for="(item) in articulo" :key="item.id">
     {{item}}
   </div>
+  
 </template>
 
 <script>
